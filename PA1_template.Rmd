@@ -51,10 +51,15 @@ Largest average interval is interval `r ag[which.max(ag$x), 1] `
 
 Number of NA's = `r sum(is.na(data$steps))`
 
-### Sum w/o NA's
+#### Replace NA's with the average for the 5 minute interval they were taken in (rounded to the nearest int)
 ```{r}
 mdata <- merge(data, ag, by.x = "interval", by.y = "Group.1")
 mdata$steps[is.na(mdata$steps)] <- round(mdata$x[is.na(mdata$steps)])
+```
+
+
+### Sum w/o NA's
+```{r}
 hist(aggregate(mdata$steps, list(mdata$date), sum)$x)
 ```
 

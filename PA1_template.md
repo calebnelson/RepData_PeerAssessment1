@@ -62,15 +62,21 @@ Largest average interval is interval 835
 
 Number of NA's = 2304
 
-### Sum w/o NA's
+#### Replace NA's with the average for the 5 minute interval they were taken in (rounded to the nearest int)
 
 ```r
 mdata <- merge(data, ag, by.x = "interval", by.y = "Group.1")
 mdata$steps[is.na(mdata$steps)] <- round(mdata$x[is.na(mdata$steps)])
+```
+
+
+### Sum w/o NA's
+
+```r
 hist(aggregate(mdata$steps, list(mdata$date), sum)$x)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 ### Mean w/o NA's
 
@@ -78,7 +84,7 @@ hist(aggregate(mdata$steps, list(mdata$date), sum)$x)
 hist(aggregate(mdata$steps, list(mdata$date), mean)$x)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 ### Median w/o NA's
 
@@ -115,10 +121,10 @@ Weekends <- aggregate(wedata$steps, list(wedata$interval), mean)
 plot(Weekdays$Group.1, Weekdays$x, type="l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
 ```r
 plot(Weekends$Group.1, Weekends$x, type="l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-2.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-10-2.png)<!-- -->
